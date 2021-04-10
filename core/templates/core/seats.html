@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Seats</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row flex-column align-items-center mt-5">
+            <div class="col-sm-12 col-md-4">
+                <h4>
+                    Choose seats from <strong class="text-success">Green</strong> seats.
+                </h4>
+                <small>Each ticket costs only $5.</small>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <form action="{% url 'pay' %}" method="post" class="d-flex flex-column">
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-between">
+                        <div class="leftseats">
+                            <div class="seat-row d-flex my-2">
+                                <div class="seat p-2 bg-success" data-seat-number="a1">
+                                    A1
+                                </div>
+                                <div class="mx-2 seat p-2 bg-success" data-seat-number="a2">
+                                    A2
+                                </div>
+                            </div>
+                            <div class="seat-row d-flex my-2">
+                                <div class="seat p-2 bg-success" data-seat-number="c1">
+                                    C1
+                                </div>
+                                <div class="mx-2 seat p-2 bg-success" data-seat-number="c2">
+                                    C2
+                                </div>
+                            </div>
+                            <div class="seat-row d-flex my-2">
+                                <div class="seat p-2 bg-success" data-seat-number="e1">
+                                    E1
+                                </div>
+                                <div class="mx-2 seat p-2 bg-success" data-seat-number="e2">
+                                    E2
+                                </div>
+                            </div>
+                            <div class="seat-row d-flex my-2">
+                                <div class="seat p-2 bg-success" data-seat-number="g1">
+                                    G1
+                                </div>
+                                <div class="mx-2 seat p-2 bg-success" data-seat-number="g2">
+                                    G2
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="driverside-seats">
+                            <div class="seat-row d-flex my-2">
+                                <div class="seat p-2 bg-success" data-seat-number="b1">
+                                    B1
+                                </div>
+                                <div class="ms-2 seat p-2 bg-success" data-seat-number="b2">
+                                    B2
+                                </div>
+                            </div>
+                            <div class="seat-row d-flex my-2" data-seat-number="d1">
+                                <div class="seat p-2 bg-success">
+                                    D1
+                                </div>
+                                <div class="mx-2 seat p-2 bg-success" data-seat-number="d2">
+                                    D2
+                                </div>
+                            </div>
+                            <div class="seat-row d-flex my-2">
+                                <div class="seat p-2 bg-success" data-seat-number="f1">
+                                    F1
+                                </div>
+                                <div class="mx-2 seat p-2 bg-success" data-seat-number="f2">
+                                    F2
+                                </div>
+                            </div>
+                            <div class="seat-row d-flex my-2">
+                                <div class="seat p-2 bg-success" data-seat-number="h1">
+                                    H1
+                                </div>
+                                <div class="mx-2 seat p-2 bg-success" data-seat-number="h2">
+                                    H2
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hiddenInputs"></div>
+                    <input id="submit" type="submit" value="Pay now" class="btn btn-warning">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const submit = document.getElementById('submit');
+            const seats = document.querySelectorAll('.seat');
+            let hiddenInputs = document.getElementById('hiddenInputs');
+
+            seats.forEach((seat) => {
+                seat.addEventListener('click', () => {
+                    const seatNumber = seat.dataset.seatNumber;
+                    const newInput = `<input type="hidden" name="seats" value=${seatNumber} />`;
+                    hiddenInputs.innerHTML += newInput;
+                })
+            })
+        })();
+    </script>
+</body>
+</html>

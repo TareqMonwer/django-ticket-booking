@@ -10,88 +10,34 @@
 <body>
     <div class="container">
         <div class="row flex-column align-items-center mt-5">
-            <div class="col-sm-12 col-md-4">
-                <h4>
+            <div class="col-sm-12 col-md-4 text-center mb-4">
+                <h4 class="mb-0">
                     Choose seats from <strong class="text-success">Green</strong> seats.
                 </h4>
                 <small>Each ticket costs only $5.</small>
             </div>
             <div class="col-sm-12 col-md-3">
-                <form action="{% url 'pay' %}" method="post" class="d-flex flex-column">
+                <form action="." method="POST" class="d-flex flex-column">
                     {% csrf_token %}
-                    <div class="d-flex justify-content-between">
-                        <div class="leftseats">
-                            <div class="seat-row d-flex my-2">
-                                <div class="seat p-2 bg-success" data-seat-number="a1">
-                                    A1
-                                </div>
-                                <div class="mx-2 seat p-2 bg-success" data-seat-number="a2">
-                                    A2
-                                </div>
-                            </div>
-                            <div class="seat-row d-flex my-2">
-                                <div class="seat p-2 bg-success" data-seat-number="c1">
-                                    C1
-                                </div>
-                                <div class="mx-2 seat p-2 bg-success" data-seat-number="c2">
-                                    C2
-                                </div>
-                            </div>
-                            <div class="seat-row d-flex my-2">
-                                <div class="seat p-2 bg-success" data-seat-number="e1">
-                                    E1
-                                </div>
-                                <div class="mx-2 seat p-2 bg-success" data-seat-number="e2">
-                                    E2
-                                </div>
-                            </div>
-                            <div class="seat-row d-flex my-2">
-                                <div class="seat p-2 bg-success" data-seat-number="g1">
-                                    G1
-                                </div>
-                                <div class="mx-2 seat p-2 bg-success" data-seat-number="g2">
-                                    G2
-                                </div>
-                            </div>
-                        </div>
+                    <div class="d-flex flex-wrap justify-content-between">
 
-                        <div class="driverside-seats">
-                            <div class="seat-row d-flex my-2">
-                                <div class="seat p-2 bg-success" data-seat-number="b1">
-                                    B1
+                        {% for seat in seats %}
+                            {% if seat in booked_seats %}
+                                <div class="booked-seat p-2 bg-danger m-1" data-seat-number="{{ seat.number }}">
+                                    {{ seat.number|upper }}
                                 </div>
-                                <div class="ms-2 seat p-2 bg-success" data-seat-number="b2">
-                                    B2
+                            {% else %}
+                                <div class="seat p-2 bg-success m-1" data-seat-number="{{ seat.number }}">
+                                    {{ seat.number|upper }}
                                 </div>
-                            </div>
-                            <div class="seat-row d-flex my-2" data-seat-number="d1">
-                                <div class="seat p-2 bg-success">
-                                    D1
-                                </div>
-                                <div class="mx-2 seat p-2 bg-success" data-seat-number="d2">
-                                    D2
-                                </div>
-                            </div>
-                            <div class="seat-row d-flex my-2">
-                                <div class="seat p-2 bg-success" data-seat-number="f1">
-                                    F1
-                                </div>
-                                <div class="mx-2 seat p-2 bg-success" data-seat-number="f2">
-                                    F2
-                                </div>
-                            </div>
-                            <div class="seat-row d-flex my-2">
-                                <div class="seat p-2 bg-success" data-seat-number="h1">
-                                    H1
-                                </div>
-                                <div class="mx-2 seat p-2 bg-success" data-seat-number="h2">
-                                    H2
-                                </div>
-                            </div>
-                        </div>
+                            {% endif %}
+                        {% endfor %}
+
                     </div>
+                    <input type="hidden" name="from_city" value="{{ departure_city }}">
+                    <input type="hidden" name="to_city" value="{{ destination }}">
                     <div id="hiddenInputs"></div>
-                    <input id="submit" type="submit" value="Pay now" class="btn btn-warning">
+                    <input id="submit" type="submit" value="Pay now" class="btn btn-warning mt-3">
                 </form>
             </div>
         </div>
@@ -108,6 +54,8 @@
                     const seatNumber = seat.dataset.seatNumber;
                     const newInput = `<input type="hidden" name="seats" value=${seatNumber} />`;
                     hiddenInputs.innerHTML += newInput;
+                    seat.classList.remove('bg-success');
+                    seat.classList.add('bg-warning');
                 })
             })
         })();

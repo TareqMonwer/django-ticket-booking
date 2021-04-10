@@ -16,33 +16,43 @@
                 </h4>
             </div>
             <div class="col-sm-12 col-md-4">
-                <form action="{% url 'seat_planner' %}" method="POST">
-                    {% csrf_token %}
+                <form action="{% url 'seat_planner' %}" method="GET">
                     <div class="form-floating mb-3">
                         <select class="form-select form-control" name="from">
                             <option selected>City</option>
-                            <option value="1">Dhaka</option>
-                            <option value="2">Chittagong</option>
-                            <option value="3">Khulna</option>
-                            <option value="3">Rajshahi</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Chittagong">Chittagong</option>
+                            <option value="Khulna">Khulna</option>
+                            <option value="Rajshahi">Rajshahi</option>
                         </select>
                         <label for="floatingInput">From</label>
                     </div>
                     <div class="form-floating">
                         <select class="form-select form-control" name="to">
                             <option selected>City</option>
-                            <option value="1">Dhaka</option>
-                            <option value="2">Chittagong</option>
-                            <option value="3">Khulna</option>
-                            <option value="3">Rajshahi</option>
+                            <option value="dhaka">Dhaka</option>
+                            <option value="Chittagong">Chittagong</option>
+                            <option value="Khulna">Khulna</option>
+                            <option value="Rajshahi">Rajshahi</option>
                         </select>
                         <label for="floatingPassword">To</label>
                     </div>
                     <div class="row mt-3 g-2 justify-content-between">
-                        <div class="col-4">
+                        <div class="col-6">
                             <input type="date" name="date" class="btn btn-light">
                         </div>
-                        <div class="col-7 d-grid">
+                        <div class="col-6">
+                            <div class="form-floating">
+                                <select class="form-select form-control" name="time">
+                                    <option value="08.00">08.00 AM</option>
+                                    <option value="08.30">08.30 AM</option>
+                                    <option value="10.00">10.00 AM</option>
+                                    <option value="10.30">10.30 AM</option>
+                                </select>
+                                <label for="floatingPassword">Time</label>
+                            </div>
+                        </div>
+                        <div class="col-12 d-grid">
                             <input type="submit" value="Continue" class="btn btn-warning">
                         </div>
                     </div>

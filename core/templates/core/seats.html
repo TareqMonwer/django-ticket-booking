@@ -55,14 +55,29 @@
             const seats = document.querySelectorAll('.seat');
             let hiddenInputs = document.getElementById('hiddenInputs');
 
-            seats.forEach((seat) => {
-                seat.addEventListener('click', () => {
-                    const seatNumber = seat.dataset.seatNumber;
-                    const newInput = `<input type="hidden" name="seats" value=${seatNumber} />`;
+            toggleSeatSelection = (e) => {
+                const seat = e.target;
+                const seatNumber = seat.dataset.seatNumber;
+                
+                // if the seat is not selected, then select it.
+                if(seat.classList.contains('bg-success')) {
+                    const newInput = `<input type="hidden" id=${seatNumber} name="seats" value=${seatNumber} />`;
                     hiddenInputs.innerHTML += newInput;
                     seat.classList.remove('bg-success');
                     seat.classList.add('bg-warning');
-                })
+                } else {
+                    // if the seat is selected, but clicked again to deselect.
+                    // remove the hiddenInput for the seat.
+                    document.getElementById(`${seatNumber}`).remove()
+                    // alter the bg-warning class with bg-success.
+                    seat.classList.remove('bg-warning');
+                    seat.classList.add('bg-success');
+                }
+                
+            }
+
+            seats.forEach((seat) => {
+                seat.addEventListener('click', toggleSeatSelection)
             })
         })();
     </script>

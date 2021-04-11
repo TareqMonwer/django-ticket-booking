@@ -18,7 +18,7 @@
             <div class="col-sm-12 col-md-4">
                 <form action="{% url 'seat_planner' %}" method="GET">
                     <div class="form-floating mb-3">
-                        <select class="form-select form-control" name="from">
+                        <select class="form-select form-control" name="from" required>
                             <option selected>City</option>
                             <option value="Dhaka">Dhaka</option>
                             <option value="Chittagong">Chittagong</option>
@@ -28,7 +28,7 @@
                         <label for="floatingInput">From</label>
                     </div>
                     <div class="form-floating">
-                        <select class="form-select form-control" name="to">
+                        <select class="form-select form-control" name="to" required>
                             <option selected>City</option>
                             <option value="dhaka">Dhaka</option>
                             <option value="Chittagong">Chittagong</option>
@@ -39,11 +39,11 @@
                     </div>
                     <div class="row mt-3 g-2 justify-content-between">
                         <div class="col-6">
-                            <input type="date" name="date" class="btn btn-light">
+                            <input type="date" name="date" class="btn btn-light" required>
                         </div>
                         <div class="col-6">
                             <div class="form-floating">
-                                <select class="form-select form-control" name="time">
+                                <select class="form-select form-control" name="time" required>
                                     <option value="08.00">08.00 AM</option>
                                     <option value="08.30">08.30 AM</option>
                                     <option value="10.00">10.00 AM</option>

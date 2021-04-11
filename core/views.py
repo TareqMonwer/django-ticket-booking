@@ -28,7 +28,7 @@ def seat_planner(request):
         )
         booked_tickets = Ticket.objects.filter(
             departure_at=departure_time,
-            departure_city=departure_city
+            departure_city__iexact=departure_city
         )
         booked_seats = [ticket.seat for ticket in booked_tickets]
         ctx = {
@@ -37,6 +37,7 @@ def seat_planner(request):
             'departure_city': departure_city,
             'destination': destination
         }
+        print(booked_tickets)
         return render(request, 'core/seats.html', ctx)
 
     elif request.method == 'POST':
@@ -55,7 +56,7 @@ def seat_planner(request):
                 departure_at=dept_time,
                 departure_city=from_city
             )
-            del request.session['booking_time']
+            # del request.session['booking_time']
         msg = ', '.join(seats) + ' You booked these seats.'
         return HttpResponse(msg)
 

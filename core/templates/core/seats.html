@@ -43,7 +43,12 @@
                     <input type="hidden" name="from_city" value="{{ departure_city }}">
                     <input type="hidden" name="to_city" value="{{ destination }}">
                     <div id="hiddenInputs"></div>
-                    <input id="submit" type="submit" value="Pay now" class="btn btn-warning mt-3">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger mt-3" id="backBtn">
+                            Back
+                        </button>
+                        <input id="submit" type="submit" value="Pay now" class="btn btn-warning mt-3">
+                    </div>
                 </form>
             </div>
         </div>
@@ -52,10 +57,16 @@
     <script>
         (function() {
             const submit = document.getElementById('submit');
+            const backBtn = document.getElementById('backBtn');
             const seats = document.querySelectorAll('.seat');
             let hiddenInputs = document.getElementById('hiddenInputs');
 
             let countSelectedSeats = document.getElementById('hiddenInputs').childNodes.length;
+
+            const goBack = (e) => {
+                e.preventDefault();
+                window.history.go(-1);
+            }
 
             const updateSubmitBtn = (selectionCounter) => {
                 if (selectionCounter == 1) {
@@ -98,6 +109,10 @@
             // inistial state of submit btn.
             updateSubmitBtn('init');
 
+            // event listener on backBtn
+            backBtn.addEventListener('click', goBack);
+
+            // event listeners on seat selection
             seats.forEach((seat) => {
                 seat.addEventListener('click', toggleSeatSelection)
             })

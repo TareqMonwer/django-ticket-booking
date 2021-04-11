@@ -26,8 +26,6 @@ SECRET_KEY = 'django-insecure-zj7vpavk1ed#^3*f19o0p_g&jhe=ak_+syo83is+yrg)r(c0*!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*',
-    '172.105.40.159',
     'ticket.erpbud.com',
     'http://ticket.erpbud.com/',
 ]

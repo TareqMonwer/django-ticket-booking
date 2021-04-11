@@ -55,6 +55,21 @@
             const seats = document.querySelectorAll('.seat');
             let hiddenInputs = document.getElementById('hiddenInputs');
 
+            let countSelectedSeats = document.getElementById('hiddenInputs').childNodes.length;
+
+            const updateSubmitBtn = (selectionCounter) => {
+                if (selectionCounter == 1) {
+                    countSelectedSeats += 1;
+                } else if (selectionCounter != 'init') {
+                    countSelectedSeats -= 1;
+                }
+                if (countSelectedSeats < 1) {
+                    submit.disabled = true;
+                } else {
+                    submit.disabled = false;
+                }
+            }
+
             toggleSeatSelection = (e) => {
                 const seat = e.target;
                 const seatNumber = seat.dataset.seatNumber;
@@ -65,6 +80,8 @@
                     hiddenInputs.innerHTML += newInput;
                     seat.classList.remove('bg-success');
                     seat.classList.add('bg-warning');
+                    // update countSelectedSeats
+                    updateSubmitBtn(1);
                 } else {
                     // if the seat is selected, but clicked again to deselect.
                     // remove the hiddenInput for the seat.
@@ -72,9 +89,14 @@
                     // alter the bg-warning class with bg-success.
                     seat.classList.remove('bg-warning');
                     seat.classList.add('bg-success');
+                    // update countSelectedSeats
+                    updateSubmitBtn(0)
                 }
                 
             }
+
+            // inistial state of submit btn.
+            updateSubmitBtn('init');
 
             seats.forEach((seat) => {
                 seat.addEventListener('click', toggleSeatSelection)

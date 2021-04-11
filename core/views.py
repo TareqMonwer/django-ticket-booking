@@ -37,7 +37,6 @@ def seat_planner(request):
             'departure_city': departure_city,
             'destination': destination
         }
-        print(booked_tickets)
         return render(request, 'core/seats.html', ctx)
 
     elif request.method == 'POST':

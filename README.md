@@ -1,4 +1,4 @@
-# django-ticket-booking : Open source project for awesome Django devs, Learners.
+# django-ticket-booking : Open source project for awesome devs, learners.
 Goal: Build A minimal functional ticket booking system with Django, JavaScript and Bootstrap/Sass/CSS.
 
 ### We Have a [Contribution Guideline Here, Please Check.](contribute.md)

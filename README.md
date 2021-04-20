@@ -6,6 +6,14 @@ Goal: Build A minimal functional ticket booking system with Django, JavaScript a
 
 ### Installation
 + clone & go to the repo folder
+
+#### pipenv installation guide:
++ install the pipenv package manager first
++ go to the project root directory where manage.py resides.
++ run `pipenv shell`, it will create and activate virtualenv
++ run `pipenv install` it will install all dependencies listed in Pipfile.lock.
+
+#### If you prefer virtualenv or venv, consider following this installation guide:
 + create a virtual environment `virtualenv env` or use any equivalant tool.
 + activate virtualenv `source env/bin/activate` in linux. For windows, use `.\env\bin\activate.bat` (probably).
 + Install dependencies by running `pip install -r requirements.txt` command.
